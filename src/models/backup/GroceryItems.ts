@@ -1,9 +1,7 @@
 import { DataTypes } from 'sequelize';
 import {sequelize} from '../database';
 
-console.log("@@@sequelize",sequelize)
-
-const GroceryItem = sequelize.define('GroceryItem', {
+const GroceryItems = sequelize.define('GroceryItems', {
   name: {
     type: DataTypes.STRING,
     allowNull: false,
@@ -18,4 +16,4 @@ const GroceryItem = sequelize.define('GroceryItem', {
   },
 });
 
-export default GroceryItem;
+export default GroceryItems;

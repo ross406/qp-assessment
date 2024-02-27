@@ -1,7 +1,10 @@
 import express from 'express';
  // Import your sequelize connection and setup
-import GroceryItem from './models/GroceryItem';
+// import GroceryItem from './models/GroceryItems';
+import adminRoutes from './routes/adminRoutes';
+import userRoutes from './routes/userRoutes';
 import dotenv from 'dotenv';
+
 
 dotenv.config();
 
@@ -20,13 +23,15 @@ export const mySqlPassword = process.env.MYSQL_PASSWORD ?? '';
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-  res.send('Grocery Booking API GG !!!!');
-});
+
 
 // Database initialization and then starting the server
 sequelize.sync().then(() => {
   console.log('Database synced!');
+
+  // app.use('/admin', adminRoutes);
+  // app.use('/', userRoutes);
+
   app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
   });
@@ -34,3 +39,9 @@ sequelize.sync().then(() => {
   console.error('Failed to sync database:', err);
 });
 
+app.use('/admin', adminRoutes);
+app.use('/', userRoutes);
+
+// app.get('/', (req, res) => {
+//   res.send('Grocery Booking API GG !!!!');
+// });
